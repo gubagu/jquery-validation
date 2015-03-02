@@ -6,13 +6,20 @@
 	<link rel="stylesheet" media="screen" href="css/screen.css">
 	<script src="../lib/jquery.js"></script>
 	<script src="../dist/jquery.validate.js"></script>
-	<script>
+	<script src="../src/additional/bsnNL.js"></script>
+    <script src="../dist/localization/messages_nl.js"></script>
+    <script>
 	// extend the current rules with new groovy ones
 
 	// this one requires the text "buga", we define a default message, too
 	$.validator.addMethod("buga", function(value) {
 		return value == "buga";
 	}, 'Please enter "buga"!');
+
+    $.validator.addClassRules("bsn", {
+        bsnNL: true,
+        required: true
+    });
 
 	// this one requires the value to be the same as the first parameter
 	$.validator.methods.equal = function(value, element, param) {
@@ -40,6 +47,9 @@
 					number: true
 				},
 				secret: "buga",
+                bsn: {
+                    required: true
+                },
 				math: {
 					equal: 11
 				}
@@ -87,6 +97,7 @@
 					<td>
 						<input id="number" name="number" title="Please enter a number with at least 3 and max 15 characters!">
 					</td>
+
 					<td></td>
 				</tr>
 				<tr>
@@ -107,6 +118,13 @@
 					</td>
 					<td></td>
 				</tr>
+                <tr>
+                    <td><label for="bsn">Bsn</label></td>
+                    <td>
+                        <input id="bsn" name="bsn" class="bsn" title="Please enter a valid bsn">
+                    </td>
+                    <td></td>
+                </tr>
 			</table>
 			<input class="submit" type="submit" value="Submit">
 		</fieldset>
